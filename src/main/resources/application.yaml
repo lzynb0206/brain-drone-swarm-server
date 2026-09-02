@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: brain-drone-swarm-server
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://127.0.0.1:5432/brain_drone_swarm}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+server:
+  port: ${SERVER_PORT:8080}
+
+app:
+  jwt:
+    # 本地默认值仅用于开发。部署时必须通过 JWT_SECRET 覆盖，至少 32 字节。
+    secret: ${JWT_SECRET:local-demo-jwt-secret-change-before-production-2026}
+    access-token-minutes: ${JWT_ACCESS_TOKEN_MINUTES:60}
+  security:
+    # 为满足课题演示，注册页可选择身份；正式部署必须改为 false 并由管理员授权。
+    allow-role-selection-on-registration: ${ALLOW_REGISTRATION_ROLE_SELECTION:true}
